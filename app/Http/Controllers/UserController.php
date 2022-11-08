@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use app\Classes\Const\DatabaseConst\UserTableConst as us;
 
 use Illuminate\Support\Facades\Log;
-use App\classes\Util\Util;
+use App\Classes\Util\Util;
 
 class UserController extends Controller
 {

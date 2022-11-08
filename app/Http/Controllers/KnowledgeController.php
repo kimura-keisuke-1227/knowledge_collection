@@ -13,7 +13,7 @@ use App\Classes\Const\DatabaseConst\KnowledgeTableCommon as kn;
 use App\Classes\Const\DatabaseConst\CategoryTableConst as csct;
 
 use Illuminate\Support\Facades\Log;
-use App\classes\Util\Util;
+use App\Classes\Util\Util;
 
 class KnowledgeController extends Controller
 {

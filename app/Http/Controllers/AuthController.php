@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 use Illuminate\Support\Facades\Log;
-use App\classes\Util\Util;
+use App\Classes\Util\Util;
 
 class AuthController extends Controller
 {

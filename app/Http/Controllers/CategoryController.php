@@ -7,7 +7,7 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 
 use Illuminate\Support\Facades\Log;
-use App\classes\Util\Util;
+use App\Classes\Util\Util;
 
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\CategoryTableConst as cat;
