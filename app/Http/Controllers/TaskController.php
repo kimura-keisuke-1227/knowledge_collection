@@ -6,6 +6,8 @@ use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
 
+use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
+
 class TaskController extends Controller
 {
     /**
@@ -82,5 +84,10 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         //
+    }
+
+    public function getTasksFromProject($project_id){
+        return Task::where(pr::CONST_FOREIGN_ID_KEY_OF_PROJECT_ID,$project_id)
+        -> get();
     }
 }

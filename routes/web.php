@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,6 +36,9 @@ Route::resource('/knowledge',KnowledgeController::class)
 ->middleware('auth');
 
 Route::resource('/projects',ProjectController::class)
+->middleware('auth');
+
+Route::resource('/tasks',TaskController::class)
 ->middleware('auth');
 
 //ログイン画面
