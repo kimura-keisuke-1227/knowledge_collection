@@ -4,7 +4,12 @@
 
 @section('content')
 <div class="container">
-    <form action="{{Route('knowledge.store')}}" method="POST">
+    @if ($mode=='create')
+        <form action="{{Route('projects.store')}}" method="POST">
+    @elseif ($mode=='edit')
+        <form action="{{Route('projects.update')}}" method="POST">
+        @method('PUT')
+    @endif
         @csrf
 
         @if($errors->any())
@@ -40,7 +45,7 @@
                 <td>題名</td>
                 <td>
                     <div class="mb-6">
-                        <input id="title" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="title" value="{{ $knowledge -> getMyTitle()}}">
+                        <input id="title" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="title" value="{{ $projects -> getMyTitle()}}">
                     </div>
                 </td>
             </tr>
@@ -48,7 +53,7 @@
                 <td>まとめ</td>
                 <td>
                     <div class="mb-6">
-                        <input id="summary" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="summary" value="{{ $knowledge -> getMySummary()}}">
+                        <input id="summary" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="summary" value="{{ $projects -> getMySummary()}}">
                     </div>
                 </td>
             </tr>
@@ -62,10 +67,10 @@
             </tr>
         </table>
         <div class="mb-4">
-            <label for="knowledge" class="block text-left p-1 my-1 font-medium">詳細<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
+            <label for="projects" class="block text-left p-1 my-1 font-medium">詳細<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
             {{--
                 --}}
-            <textarea id="knowledge" name="knowledge" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{!! $knowledge -> knowledge !!}</textarea>
+            <textarea id="projects" name="projects" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{!! $projects -> projects !!}</textarea>
         </div>
         <br>
         <div class="ml-auto">
