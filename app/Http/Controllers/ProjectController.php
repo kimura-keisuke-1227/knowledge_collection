@@ -6,6 +6,12 @@ use App\Http\Requests\StoreProjectsRequest;
 use App\Http\Requests\UpdateProjectsRequest;
 use App\Models\Project;
 
+use Illuminate\Support\Facades\Log;
+use App\Classes\Util\Util;
+
+use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+
 class ProjectController extends Controller
 {
     /**
@@ -15,7 +21,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return $this->getProjectsView($this->getMyProjectList());
     }
 
     /**
@@ -82,5 +90,25 @@ class ProjectController extends Controller
     public function destroy(Project $projects)
     {
         //
+    }
+
+    private function getMyProjectList()
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+
+        $projects = Project::where(cm::CONST_COMMON_CLM_NAME_USER_ID, Util::getUserId())
+            ->get();
+
+        Log::notice(__METHOD__ . '(' . __LINE__ . ') user(' . Util::getUserId() . ') got projects data from DB!!');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return $projects;
+    }
+
+    private function getProjectsView($projects){
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return view('projects.index',[
+            'projects' => $projects,
+        ]);
     }
 }
