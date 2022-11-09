@@ -33,6 +33,8 @@ return new class extends Migration
                 ->default(1);
             $table->integer(cm::CONST_COMMON_CLM_NAME_COUNT)
                 ->default(0);
+            $table->integer(cm::CONST_COMMON_CLM_NAME_STATUS)
+                ->default(0);
             $table->dateTime(cm::CONST_COMMON_CLM_NAME_FINAL_REFERENCE)
                 ->nullable();
             $table->timestamps();
