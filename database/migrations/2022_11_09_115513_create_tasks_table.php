@@ -18,7 +18,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
+        Schema::create(ts::CONST_TABLE_NAME_OF_TASK, function (Blueprint $table) {
             $table->id();
             $table->foreignId(pr::CONST_FOREIGN_ID_KEY_OF_PROJECT_ID);
             $table->foreignId(cm::CONST_COMMON_CLM_NAME_USER_ID);
@@ -40,6 +40,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists(ts::CONST_TABLE_NAME_OF_TASK);
     }
 };
