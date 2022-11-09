@@ -18,18 +18,21 @@ use App\Http\Controllers\KnowledgeController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})
-->name('main');
+Route::get('/', [KnowledgeController::class,'index'])
+->name('main')
+->middleware('auth');
 
-Route::resource('/codes',CodeController::class);
+Route::resource('/codes',CodeController::class)
+->middleware('auth');
 
-Route::resource('/users', UserController::class);
+Route::resource('/users', UserController::class)
+->middleware('auth');
 
-Route::resource('/categories',CategoryController::class);
+Route::resource('/categories',CategoryController::class)
+->middleware('auth');
 
-Route::resource('/knowledge',KnowledgeController::class);
+Route::resource('/knowledge',KnowledgeController::class)
+->middleware('auth');
 
 //ログイン画面
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
