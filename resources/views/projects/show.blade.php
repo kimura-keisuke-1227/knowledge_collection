@@ -78,7 +78,7 @@
         </div>
     </form>
     <h3>タスク</h3>
-    <a href="{{Route('tasks.create')}}">タスク登録</a>
+    <a href="{{Route('tasks.create',['project' => $project])}}">タスク登録</a>
     <table class='table table-striped'>
         <tr>
             <th>id</th>

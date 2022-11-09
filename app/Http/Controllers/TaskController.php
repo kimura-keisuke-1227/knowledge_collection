@@ -5,8 +5,15 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreTaskRequest;
 use App\Http\Requests\UpdateTaskRequest;
 use App\Models\Task;
+use Illuminate\Support\Facades\Log;
+use App\Classes\Util\Util;
 
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+
+use App\Models\Project;
+
+use Exception;
 
 class TaskController extends Controller
 {
@@ -27,7 +34,9 @@ class TaskController extends Controller
      */
     public function create()
     {
-        //
+        return view('task.create',[
+            
+        ]);
     }
 
     /**
@@ -38,7 +47,25 @@ class TaskController extends Controller
      */
     public function store(StoreTaskRequest $request)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        $validated = $request->validated();
+        Log::debug(__METHOD__.'('.__LINE__.') $validated:');
+        $project = session('project');
+        $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
+        $validated[pr::CONST_FOREIGN_ID_KEY_OF_PROJECT_ID] = $project->id;
+        $validated[cm::CONST_COMMON_CLM_NAME_STATUS] = 0;
+        Log::debug( $validated);
+        
+        try{
+            $task = Task::create($validated);
+            Log::notice(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') created a task(' . $task->id.')');
+        }catch(Exception $e){
+            return 'エラーが発生しました。';
+        }
+        
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return redirect()-> Route('projects.show',['project' => $project]);
+
     }
 
     /**
