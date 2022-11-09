@@ -12,5 +12,7 @@ class ProjectTableConst
     const CONST_FOREIGN_ID_KEY_OF_PROJECT_ID = 'project_id';
 
     const CONST_CLM_NAME_OF_PROJECT_TABLE_PROJECT = 'project';
+    const CONST_CLM_NAME_OF_PROJECT_TABLE_START_DATE = 'start_date';
+    const CONST_CLM_NAME_OF_PROJECT_TABLE_END_DATE = 'end_date';
 
 }

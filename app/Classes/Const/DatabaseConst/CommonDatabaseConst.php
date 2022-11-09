@@ -16,6 +16,7 @@ class CommonDatabaseConst
     const CONST_INT_NO_USER_ID = 0;
     const CONST_COMMON_CLM_NAME_FINAL_REFERENCE = 'final_reference';
     const CONST_COMMON_CLM_NAME_STATUS = 'status';
+    const CONST_COMMON_CLM_NAME_DETAIL = 'detail';
 
     const CONST_INT_NO_CATEGORY_ID = 0;
 
