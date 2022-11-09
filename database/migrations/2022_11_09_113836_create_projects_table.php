@@ -21,6 +21,7 @@ return new class extends Migration
             $table->id();
             $table->string(pr::CONST_CLM_NAME_OF_PROJECT_TABLE_PROJECT);
             $table->integer(cm::CONST_COMMON_CLM_NAME_ORDER);
+            $table->foreignId(cm::CONST_COMMON_CLM_NAME_USER_ID);
             $table->foreignId(cm::CONST_COMMON_CLM_NAME_STATUS);
             $table->date(pr::CONST_CLM_NAME_OF_PROJECT_TABLE_START_DATE);
             $table->date(pr::CONST_CLM_NAME_OF_PROJECT_TABLE_END_DATE);

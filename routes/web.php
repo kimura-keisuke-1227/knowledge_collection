@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\KnowledgeController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,13 +26,15 @@ Route::get('/', [KnowledgeController::class,'index'])
 Route::resource('/codes',CodeController::class)
 ->middleware('auth');
 
-Route::resource('/users', UserController::class)
-->middleware('auth');
+Route::resource('/users', UserController::class);
 
 Route::resource('/categories',CategoryController::class)
 ->middleware('auth');
 
 Route::resource('/knowledge',KnowledgeController::class)
+->middleware('auth');
+
+Route::resource('/projects',ProjectController::class)
 ->middleware('auth');
 
 //ログイン画面
