@@ -103,7 +103,14 @@ class TaskController extends Controller
      */
     public function update(UpdateTaskRequest $request, Task $task)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        $validated = $request-> validated();
+        $task->update($validated);
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        $project = session('project');
+        return redirect() -> Route('projects.show',[
+            'project' => $project,
+        ]);
     }
 
     /**
