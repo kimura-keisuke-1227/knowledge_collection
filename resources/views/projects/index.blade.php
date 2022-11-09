@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', '記事一覧')
+@section('title', '案件一覧')
 
 @section('content')
     <div class="container">
