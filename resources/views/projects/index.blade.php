@@ -12,12 +12,12 @@
                 <th>概要</th>
                 <th></th>
             </tr>
-            @foreach ($knowledge as $article)
+            @foreach ($projects as $project)
                 <tr>
-                    <td>{{ $article -> id}}</td>
-                    <td>{{ $article -> title }}</td>
-                    <td>{{ $article -> summary}}</td>
-                    <td><a href="{{Route('knowledge.show', ['knowledge'=>$article])}}">詳細・修正</a></td>
+                    <td>{{ $project -> id}}</td>
+                    <td>{{ $project -> title }}</td>
+                    <td>{{ $project -> summary}}</td>
+                    <td><a href="{{Route('projects.show', ['project'=>$project])}}">詳細・修正</a></td>
                 </tr>
             @endforeach
         </table>
