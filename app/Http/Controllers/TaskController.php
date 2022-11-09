@@ -62,7 +62,7 @@ class TaskController extends Controller
         }catch(Exception $e){
             return 'エラーが発生しました。';
         }
-        
+
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         return redirect()-> Route('projects.show',['project' => $project]);
 
@@ -76,7 +76,8 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
     }
 
     /**
