@@ -37,3 +37,6 @@ Route::resource('/knowledge',KnowledgeController::class)
 //ログイン画面
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']); 
+
+//ログアウト処理
+Route::post('/admin/logout', [AuthController::class, 'logout'])->name('logout');
