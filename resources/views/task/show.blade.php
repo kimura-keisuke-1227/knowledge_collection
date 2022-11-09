@@ -7,6 +7,7 @@
     <form action="{{Route('tasks.update',[
             'task' => $task,
         ])}}" method="POST">
+        @method('PUT')
         @csrf
 
         @if($errors->any())
