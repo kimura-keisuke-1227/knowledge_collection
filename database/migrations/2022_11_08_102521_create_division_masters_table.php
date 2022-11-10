@@ -20,6 +20,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId(cm::CONST_COMMON_CLM_NAME_USER_ID)
                 ->default(cm::CONST_INT_NO_USER_ID);
+            $table->string(dv::CONST_CLM_NAME_OF_DIVISION_MASTERS_TABLE_DIVISION_MASTER_CODE);
             $table->string(dv::CONST_CLM_NAME_OF_DIVISION_MASTERS_TABLE_DIVISION_MASTER);
             $table->integer(cm::CONST_COMMON_CLM_NAME_ORDER);
             $table->timestamps();
