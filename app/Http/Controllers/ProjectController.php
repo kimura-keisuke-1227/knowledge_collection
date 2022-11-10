@@ -167,8 +167,11 @@ class ProjectController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
         $taskController = new TaskController();
-        $tasks = $taskController->getTasksFromProject($project->id);
-
+        try{
+            $tasks = $taskController->getTasksFromProject($project->id);
+        } catch(Exception $e){
+            return 'エラーが発生しました。';
+        }
 
         Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
         return view('projects.show', [
