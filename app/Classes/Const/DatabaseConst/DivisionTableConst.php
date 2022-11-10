@@ -55,13 +55,13 @@ class DivisionTableConst
         const CONST_VALUE_OF_TASK_STATUS_DESTRUCTED = 10;
         const CONST_TEXT_OF_TASK_STATUS_DESTRUCTED = '破棄';
 
-    const CONST_VALUE_DIVISION_MASTER_IMPORTANCE = 'importance';
+    const CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE = 'importance';
         const CONST_VALUE_OF_IMPORTANCE_HIGHEST = 1;
         const CONST_TEXT_OF_IMPORTANCE_HIGHEST = '最高';
         const CONST_VALUE_OF_IMPORTANCE_HIGH = 2;
         const CONST_TEXT_OF_IMPORTANCE_HIGH = '高';
-        const CONST_VALUE_OF_IMPORTANCE_MIDDLE = 3;
-        const CONST_TEXT_OF_IMPORTANCE_MIDDLE = '中';
+        const CONST_VALUE_OF_IMPORTANCE_NORMAL = 3;
+        const CONST_TEXT_OF_IMPORTANCE_NORMAL = '中';
         const CONST_VALUE_OF_IMPORTANCE_LOW = 4;
         const CONST_TEXT_OF_IMPORTANCE_LOW = '低';
         const CONST_VALUE_OF_IMPORTANCE_LOWEST = 5;
@@ -72,8 +72,8 @@ class DivisionTableConst
         const CONST_TEXT_OF_URGENCY_HIGHEST = '最高';
         const CONST_VALUE_OF_URGENCY_HIGH = 2;
         const CONST_TEXT_OF_URGENCY_HIGH = '高';
-        const CONST_VALUE_OF_URGENCY_MIDDLE = 3;
-        const CONST_TEXT_OF_URGENCY_MIDDLE = '中';
+        const CONST_VALUE_OF_URGENCY_NORMAL = 3;
+        const CONST_TEXT_OF_URGENCY_NORMAL = '中';
         const CONST_VALUE_OF_URGENCY_LOW = 4;
         const CONST_TEXT_OF_URGENCY_LOW = '低';
         const CONST_VALUE_OF_URGENCY_LOWEST = 5;
