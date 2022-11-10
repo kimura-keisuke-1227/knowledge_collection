@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
+
+use App\Models\Division;
+
 
 
 class Util
@@ -218,5 +222,15 @@ class Util
 
     private static function getStringConnectTableAndAction($table_name, $action){
         return $table_name .'.'. $action;
+    }
+
+    //division codeを指定することで、共通設定された区分のリストを取得。
+    //同一の値を入れられる危険があるため、user_id = 0のデータのみ
+    public static function getDivisionListFromDivisionMasterCode($division_code){
+        $divisions = Division::where(dv::CONST_CLM_NAME_OF_DIVISION_MASTERS_TABLE_DIVISION_MASTER_CODE,$division_code)
+        ->where(cm::CONST_COMMON_CLM_NAME_USER_ID,cm::CONST_INT_NO_USER_ID)
+        ->orderBy(cm::CONST_COMMON_CLM_NAME_ORDER)
+        ->get();
+        return $divisions;
     }
 }
