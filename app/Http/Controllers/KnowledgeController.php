@@ -14,6 +14,9 @@ use App\Classes\Const\DatabaseConst\CategoryTableConst as csct;
 
 use Illuminate\Support\Facades\Log;
 use App\Classes\Util\Util;
+use Exception;
+use GuzzleHttp\Psr7\Request;
+use Illuminate\Support\Facades\Redis;
 
 class KnowledgeController extends Controller
 {
@@ -72,9 +75,13 @@ class KnowledgeController extends Controller
         $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
         $validated[cm::CONST_COMMON_CLM_NAME_FINAL_REFERENCE] = Util::getNowTime();
 
-
-        $knowledge = Knowledge::create($validated);
-        Log::notice(__METHOD__.'('.__LINE__.') user(' .Util::getUserId() .') created knowledge date id(' .$knowledge->id .')');
+        try{
+            $knowledge = Knowledge::create($validated);
+            Log::notice(__METHOD__.'('.__LINE__.') user(' .Util::getUserId() .') created knowledge date id(' .$knowledge->id .')');
+        }
+        catch(Exception $e){
+            return('エラーが発生しました。');
+        }
 
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
 
@@ -130,6 +137,20 @@ class KnowledgeController extends Controller
     public function update(UpdateKnowledgeRequest $request, Knowledge $knowledge)
     {
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        
+        $validated = $request->validated();
+
+        try{
+            $knowledge->update($validated);
+            Log::notice(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') update knowledge(' . $knowledge->id .') !!');
+        }
+        catch(Exception $e){
+            return 'エラーが発生しました。';
+        }
+        
+        return redirect() 
+            -> Route('knowledge.show',['knowledge'=>$knowledge])
+            -> with('success', '修正しました。');
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
     }
 
