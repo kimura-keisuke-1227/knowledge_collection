@@ -7,6 +7,7 @@
     <form action="{{Route('knowledge.update',[
             'knowledge' => $knowledge
         ])}}" method="POST">
+        @method('PUT')
         @csrf
 
         @if($errors->any())
