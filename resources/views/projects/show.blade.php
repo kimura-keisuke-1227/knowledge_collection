@@ -98,6 +98,7 @@
             <th>id</th>
             <th>タスク名</th>
             <th>概要</th>
+            <th>ステータス</th>
         </tr>
         @foreach ($tasks as $task)
         <tr>
@@ -108,6 +109,7 @@
                     ])}}">{{$task->title}}</a>
             </td>
             <td>{{$task->summary}}</td>
+            <td>{{$task->status}}</td>
         </tr>
         @endforeach
     </table>
