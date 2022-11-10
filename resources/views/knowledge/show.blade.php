@@ -1,10 +1,12 @@
 @extends('layouts.user')
 
-@section('title', '記事')
+@section('title', '記事詳細')
 
 @section('content')
 <div class="container">
-    <form action="{{Route('knowledge.store')}}" method="POST">
+    <form action="{{Route('knowledge.update',[
+            'knowledge' => $knowledge
+        ])}}" method="POST">
         @csrf
 
         @if($errors->any())
