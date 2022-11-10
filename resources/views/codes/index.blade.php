@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container">
-
+        <a href="{{Route('codes.create')}}">コードを新規登録</a>
         <table class='table table-striped'>
             <tr>
                 <th>ID</th>
