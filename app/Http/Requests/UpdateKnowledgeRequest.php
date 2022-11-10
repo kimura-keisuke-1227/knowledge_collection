@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\KnowledgeTableCommon as kn;
+use App\Classes\Const\DatabaseConst\CategoryTableConst as csct;
+use App\Classes\Const\ValidationConst as vl;
+
 class UpdateKnowledgeRequest extends FormRequest
 {
     /**
@@ -23,43 +28,40 @@ class UpdateKnowledgeRequest extends FormRequest
      */
     public function rules()
     {
+
         return [
-            return [
-                csct::CONST_FOREIGN_ID_KEY_OF_CATEGORY_ID
-                    =>[
-                        vl::CONST_VALIDATION_REQUIRED
-                    ],
-                cm::CONST_COMMON_CLM_NAME_TITLE
-                    =>[
-                        vl::CONST_VALIDATION_REQUIRED,
-                        'max:255',
-                    ],
-                cm::CONST_COMMON_CLM_NAME_SUMMARY
-                    =>[
-                        vl::CONST_VALIDATION_REQUIRED,
-                        'max:255',
-                    ],
-                kn::CONST_CLM_NAME_OF_KNOWLEDGE_TABLE_KNOWLEDGE
-                    =>[
-                        vl::CONST_VALIDATION_REQUIRED
-                    ],
-                cm::CONST_COMMON_CLM_NAME_ORDER
-                    =>[
-                        vl::CONST_VALIDATION_NUMERIC,
-                        vl::CONST_VALIDATION_REQUIRED
-                    ],
-                cm::CONST_COMMON_CLM_NAME_IMPORTANCE
-                    =>[
-                        vl::CONST_VALIDATION_NUMERIC,
-                        vl::CONST_VALIDATION_REQUIRED
-                    ],
-                cm::CONST_COMMON_CLM_NAME_COUNT
-                    =>[
-                    ],
-                cm::CONST_COMMON_CLM_NAME_FINAL_REFERENCE
-                    =>[
-                    ],
-            ];
+            csct::CONST_FOREIGN_ID_KEY_OF_CATEGORY_ID
+            => [
+                vl::CONST_VALIDATION_REQUIRED
+            ],
+            cm::CONST_COMMON_CLM_NAME_TITLE
+            => [
+                vl::CONST_VALIDATION_REQUIRED,
+                'max:255',
+            ],
+            cm::CONST_COMMON_CLM_NAME_SUMMARY
+            => [
+                vl::CONST_VALIDATION_REQUIRED,
+                'max:255',
+            ],
+            kn::CONST_CLM_NAME_OF_KNOWLEDGE_TABLE_KNOWLEDGE
+            => [
+                vl::CONST_VALIDATION_REQUIRED
+            ],
+            cm::CONST_COMMON_CLM_NAME_ORDER
+            => [
+                vl::CONST_VALIDATION_NUMERIC,
+                vl::CONST_VALIDATION_REQUIRED
+            ],
+            cm::CONST_COMMON_CLM_NAME_IMPORTANCE
+            => [
+                vl::CONST_VALIDATION_NUMERIC,
+                vl::CONST_VALIDATION_REQUIRED
+            ],
+            cm::CONST_COMMON_CLM_NAME_COUNT
+            => [],
+            cm::CONST_COMMON_CLM_NAME_FINAL_REFERENCE
+            => [],
         ];
     }
 }
