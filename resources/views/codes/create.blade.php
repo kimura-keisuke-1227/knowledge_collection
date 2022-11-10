@@ -28,18 +28,18 @@
 
             </tr>
             <tr>
-                <td>概要</td>
+                <td>タイトル</td>
                 <td>
                     <div class="mb-6">
-                        <input id="summary" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="summary">
+                        <input id="title" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="title">
                     </div>
                 </td>
             </tr>
             <tr>
-                <td>説明</td>
+                <td>概要</td>
                 <td>
                     <div class="mb-6">
-                        <input id="explain" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="explain">
+                        <input id="summary" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="summary">
                     </div>
                 </td>
             </tr>

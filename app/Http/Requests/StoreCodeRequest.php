@@ -4,6 +4,8 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use App\Classes\Const\DatabaseConst\CodeTableConst as cs;
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\CategoryTableConst as ct;
 
 class StoreCodeRequest extends FormRequest
 {
@@ -25,12 +27,13 @@ class StoreCodeRequest extends FormRequest
     public function rules()
     {
         return [
-            cs::CONST_CLM_NAME_OF_CODE_TABLE_SUMMARY => [],
-            cs::CONST_CLM_NAME_OF_CODE_TABLE_EXPLAIN => [],
+            cm::CONST_COMMON_CLM_NAME_USER_ID => [],
+            cm::CONST_COMMON_CLM_NAME_TITLE => [],
+            cm::CONST_COMMON_CLM_NAME_SUMMARY => [],
             cs::CONST_CLM_NAME_OF_CODE_TABLE_CODE => [],
-            cs::CONST_CLM_NAME_OF_CODE_TABLE_LANGUAGE_ID => [],
-            cs::CONST_CLM_NAME_OF_CODE_TABLE_COUNT => [],
-            cs::CONST_CLM_NAME_OF_CODE_TABLE_IMPORTANCE => [],
+            ct::CONST_FOREIGN_ID_KEY_OF_CATEGORY_ID => [],
+            cm::CONST_COMMON_CLM_NAME_COUNT => [],
+            cm::CONST_COMMON_CLM_NAME_IMPORTANCE => [],
         ];
     }
 }

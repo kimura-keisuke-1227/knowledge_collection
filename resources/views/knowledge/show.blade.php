@@ -24,7 +24,12 @@
                         <div class="flex">
                             <select id="categories" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="category_id">
                                 @foreach($categories as $category)
-                                <option value="{{$category -> id}}">{{$category -> category}}</option>
+                                <option value="{{$category -> id}}"
+                                @if ($category -> id == $knowledge -> category_id)
+                                    selected
+                                @endif
+                                
+                                >{{$category -> category}}</option>
                                 @endforeach
                             </select>
                             <div class="pointer-events-none transform -translate-x-full flex items-center px-2 text-gray-500">
