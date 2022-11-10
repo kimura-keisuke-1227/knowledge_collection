@@ -105,7 +105,13 @@ class TaskController extends Controller
     {
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
         $validated = $request-> validated();
-        $task->update($validated);
+        try{
+            $task->update($validated);
+            Log::notice(__METHOD__.'('.__LINE__.') user(' . util::getUserId() . ' update the task (' . $task->id .') !!');
+
+        } catch(Exception $e){
+            return 'エラーが発生しました。';
+        }
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         $project = session('project');
         return redirect() -> Route('projects.show',[
