@@ -38,7 +38,7 @@
                 <td>プロジェクト名</td>
                 <td>
                     <div class="mb-6">
-                        <input id="title" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="title" value="{{ $project -> getMyProjectName()}}">
+                        <input id="project" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" name="project" value="{{ $project -> getMyProjectName()}}">
                     </div>
                 </td>
             </tr>
@@ -79,10 +79,10 @@
             </tr>
         </table>
         <div class="mb-4">
-            <label for="projects" class="block text-left p-1 my-1 font-medium">詳細<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
+            <label for="detail" class="block text-left p-1 my-1 font-medium">詳細<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
             {{--
                 --}}
-            <textarea id="projects" name="projects" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{!! $project -> getMyProjectDetail() !!}</textarea>
+            <textarea id="detail" name="detail" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{!! $project -> getMyProjectDetail() !!}</textarea>
         </div>
         <br>
 

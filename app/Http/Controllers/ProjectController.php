@@ -11,6 +11,7 @@ use App\Http\Controllers\TaskController;
 
 use Illuminate\Support\Facades\Log;
 use App\Classes\Util\Util;
+use Exception;
 
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
@@ -108,9 +109,21 @@ class ProjectController extends Controller
      * @param  \App\Models\Projects  $projects
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProjectsRequest $request, Project $projects)
+    public function update(UpdateProjectsRequest $request, Project $project)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        $validated = $request-> validated();
+        try{
+            $project->update($validated);
+            Log::notice(__METHOD__.'('.__LINE__.') user(' . util::getUserId() . ' update the project(' . $project->id .') !!');
+        } catch(Exception $e){
+            return 'エラーが発生しました。';
+        }
+
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return redirect() -> Route('projects.show',[
+            'project' => $project,
+        ]);
     }
 
     /**
