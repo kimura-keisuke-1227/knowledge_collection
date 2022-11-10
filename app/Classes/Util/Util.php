@@ -227,10 +227,28 @@ class Util
     //division codeを指定することで、共通設定された区分のリストを取得。
     //同一の値を入れられる危険があるため、user_id = 0のデータのみ
     public static function getDivisionListFromDivisionMasterCode($division_code){
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
         $divisions = Division::where(dv::CONST_CLM_NAME_OF_DIVISION_MASTERS_TABLE_DIVISION_MASTER_CODE,$division_code)
         ->where(cm::CONST_COMMON_CLM_NAME_USER_ID,cm::CONST_INT_NO_USER_ID)
         ->orderBy(cm::CONST_COMMON_CLM_NAME_ORDER)
         ->get();
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return $divisions;
+    }
+    
+    //区分コードから区分idを取得
+    public static function getDivisionIdFromDivisionCodeAndDivisionValue($division_code,$division_value){
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .') division_code:' .$division_code .' division_value:' .$division_value);
+        $divisions 
+        = Division::where(dv::CONST_CLM_NAME_OF_DIVISION_MASTERS_TABLE_DIVISION_MASTER_CODE,$division_code)
+        ->where(dv::CONST_CLM_NAME_OF_DIVISION_TABLE_DIVISION_VALUE,$division_value)
+        ->first()
+        ->id;
+        
+        Log::debug(__METHOD__.'('.__LINE__.') $divisions:');
+        Log::debug($divisions);
+
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         return $divisions;
     }
 }

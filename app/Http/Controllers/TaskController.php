@@ -10,6 +10,7 @@ use App\Classes\Util\Util;
 
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\TaskCommentTableConst as ts;
 use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
 
 use App\Models\Project;
@@ -78,11 +79,18 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
-        $task_statuses = $this->getListTaskStatuses();
+        $task_statuses =  $this->getListTaskStatuses();
+        $list_importance 
+            = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+        $urgencies 
+            = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_URGENCY);
+
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         return view('task.show',[
             'task' => $task,
             'task_statuses' => $task_statuses,
+            'list_importance' => $list_importance,
+            'urgencies' => $urgencies,
         ]);
     }
 
