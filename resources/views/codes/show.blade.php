@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', '薬品')
+@section('title', 'コード')
 
 @section('content')
 <div class="container">
