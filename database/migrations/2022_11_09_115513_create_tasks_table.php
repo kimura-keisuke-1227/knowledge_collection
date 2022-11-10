@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Schema;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\TaskTableConst as ts;
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
 
 
 return new class extends Migration
@@ -26,6 +27,8 @@ return new class extends Migration
             $table->string(cm::CONST_COMMON_CLM_NAME_SUMMARY);
             $table->string(cm::CONST_COMMON_CLM_NAME_DETAIL);
             $table->foreignId(cm::CONST_COMMON_CLM_NAME_STATUS);
+            $table->foreignId(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+            $table->foreignId(dv::CONST_VALUE_DIVISION_MASTER_URGENCY);
             $table->date(ts::CONST_CLM_NAME_OF_TASK_TABLE_START_DATE)
             ->nullable();
             $table->date(ts::CONST_CLM_NAME_OF_TASK_TABLE_END_DATE)
