@@ -28,8 +28,8 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
         return $this->getProjectsView($this->getMyProjectList());
     }
 
@@ -40,10 +40,10 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
-        
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
-        return view('projects.create',[
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return view('projects.create', [
             'categories' => $this->getMyCategoryListFromCategoryController(),
         ]);
     }
@@ -56,23 +56,28 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectsRequest $request)
     {
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
 
         $validated = $request->validated();
         #$validated[ConstList::CONST_ORDERS_TABLE_CLM_NAME_ORDER_AT] = date("Y/m/d H:i:s");
         Log::debug($validated);
 
-        $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] 
+        $validated[cm::CONST_COMMON_CLM_NAME_USER_ID]
             = Util::getUserId();
-        $validated[cm::CONST_COMMON_CLM_NAME_STATUS] 
+        $validated[cm::CONST_COMMON_CLM_NAME_STATUS]
             = dv::CONST_VALUE_OF_PROJECT_STATUS_NOT_STARTED;
 
-        $project = Project::create($validated);
-        Log::notice(__METHOD__.'('.__LINE__.') user(' .Util::getUserId() .') created knowledge date id(' .$project->id .')');
+        try {
+            $project = Project::create($validated);
+            Log::notice(__METHOD__ . '(' . __LINE__ . ') user(' . Util::getUserId() . ') created knowledge date id(' . $project->id . ')');
+        } catch (Exception $e) {
+            return 'エラーが発生しました。';
+        }
 
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
 
-        return redirect() -> Route('knowledge.index');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+
+        return redirect()->Route('knowledge.index');
     }
 
     /**
@@ -83,11 +88,11 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
 
 
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
-        session(['project'=>$project]);
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        session(['project' => $project]);
         return $this->showProjectDetail($project);
     }
 
@@ -111,17 +116,17 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectsRequest $request, Project $project)
     {
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
-        $validated = $request-> validated();
-        try{
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+        $validated = $request->validated();
+        try {
             $project->update($validated);
-            Log::notice(__METHOD__.'('.__LINE__.') user(' . util::getUserId() . ' update the project(' . $project->id .') !!');
-        } catch(Exception $e){
+            Log::notice(__METHOD__ . '(' . __LINE__ . ') user(' . util::getUserId() . ' update the project(' . $project->id . ') !!');
+        } catch (Exception $e) {
             return 'エラーが発生しました。';
         }
 
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
-        return redirect() -> Route('projects.show',[
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return redirect()->Route('projects.show', [
             'project' => $project,
         ]);
     }
@@ -149,22 +154,24 @@ class ProjectController extends Controller
         return $projects;
     }
 
-    private function getProjectsView($projects){
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
-        return view('projects.index',[
+    private function getProjectsView($projects)
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return view('projects.index', [
             'projects' => $projects,
         ]);
     }
 
-    private function showProjectDetail(Project $project){
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+    private function showProjectDetail(Project $project)
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
         $taskController = new TaskController();
         $tasks = $taskController->getTasksFromProject($project->id);
-        
-        
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
-        return view('projects.show',[
+
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return view('projects.show', [
             'project' => $project,
             'tasks' => $tasks,
             'categories' => $this->getMyCategoryListFromCategoryController(),
@@ -172,13 +179,15 @@ class ProjectController extends Controller
         ]);
     }
 
-    private function getMyCategoryListFromCategoryController(){
+    private function getMyCategoryListFromCategoryController()
+    {
         $categoryController = new CategoryController();
         $categories = $categoryController->getMyCategoryList();
         return $categories;
     }
 
-    private function getListProjectStatuses(){
+    private function getListProjectStatuses()
+    {
         return Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_PROJECT_STATUS);
     }
 }
