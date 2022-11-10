@@ -51,6 +51,7 @@ class CodeController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
         $validated = $request->validated();
+        $validated['user_id'] = Util::getUserId();
         Log::debug($validated);
         Code::create($validated);
         Log::info(__METHOD__ . '(' . __LINE__ . ') code created.');
