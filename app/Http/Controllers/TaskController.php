@@ -10,6 +10,7 @@ use App\Classes\Util\Util;
 
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
 
 use App\Models\Project;
 
@@ -77,9 +78,11 @@ class TaskController extends Controller
     public function show(Task $task)
     {
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        $task_statuses = $this->getListTaskStatuses();
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         return view('task.show',[
             'task' => $task,
+            'task_statuses' => $task_statuses,
         ]);
     }
 
@@ -133,5 +136,10 @@ class TaskController extends Controller
     public function getTasksFromProject($project_id){
         return Task::where(pr::CONST_FOREIGN_ID_KEY_OF_PROJECT_ID,$project_id)
         -> get();
+    }
+
+    private function getListTaskStatuses()
+    {
+        return Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_TASK_STATUS);
     }
 }
