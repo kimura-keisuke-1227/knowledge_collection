@@ -129,7 +129,8 @@ class KnowledgeController extends Controller
      */
     public function update(UpdateKnowledgeRequest $request, Knowledge $knowledge)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
     }
 
     /**
