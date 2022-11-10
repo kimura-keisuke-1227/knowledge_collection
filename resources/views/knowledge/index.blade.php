@@ -7,14 +7,14 @@
 
         <table class='table table-striped'>
             <tr>
-                <th>ID</th>
+                <th>表示順</th>
                 <th>タイトル</th>
                 <th>概要</th>
                 <th></th>
             </tr>
             @foreach ($knowledge as $article)
                 <tr>
-                    <td>{{ $article -> id}}</td>
+                    <td>{{ $article -> order}}</td>
                     <td>{{ $article -> title }}</td>
                     <td>{{ $article -> summary}}</td>
                     <td><a href="{{Route('knowledge.show', ['knowledge'=>$article])}}">詳細・修正</a></td>
