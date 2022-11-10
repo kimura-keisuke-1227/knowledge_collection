@@ -14,6 +14,8 @@ use App\Classes\Util\Util;
 
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
+
 use App\Models\Category;
 
 class ProjectController extends Controller
@@ -41,7 +43,7 @@ class ProjectController extends Controller
         
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         return view('projects.create',[
-            'categories' => $this->getMyCategoryListFromCategoryController()
+            'categories' => $this->getMyCategoryListFromCategoryController(),
         ]);
     }
 
@@ -59,8 +61,10 @@ class ProjectController extends Controller
         #$validated[ConstList::CONST_ORDERS_TABLE_CLM_NAME_ORDER_AT] = date("Y/m/d H:i:s");
         Log::debug($validated);
 
-        $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
-        $validated[cm::CONST_COMMON_CLM_NAME_STATUS] = 1;
+        $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] 
+            = Util::getUserId();
+        $validated[cm::CONST_COMMON_CLM_NAME_STATUS] 
+            = dv::CONST_VALUE_OF_PROJECT_STATUS_NOT_STARTED;
 
         $project = Project::create($validated);
         Log::notice(__METHOD__.'('.__LINE__.') user(' .Util::getUserId() .') created knowledge date id(' .$project->id .')');
@@ -79,6 +83,8 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+
+
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         session(['project'=>$project]);
         return $this->showProjectDetail($project);
@@ -149,6 +155,7 @@ class ProjectController extends Controller
             'project' => $project,
             'tasks' => $tasks,
             'categories' => $this->getMyCategoryListFromCategoryController(),
+            'project_statuses' => $this->getListProjectStatuses(),
         ]);
     }
 
@@ -156,5 +163,9 @@ class ProjectController extends Controller
         $categoryController = new CategoryController();
         $categories = $categoryController->getMyCategoryList();
         return $categories;
+    }
+
+    private function getListProjectStatuses(){
+        return Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_PROJECT_STATUS);
     }
 }
