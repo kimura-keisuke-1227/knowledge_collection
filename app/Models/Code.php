@@ -19,13 +19,15 @@ class Code extends Model
         cm::CONST_COMMON_CLM_NAME_SUMMARY,
         cm::CONST_COMMON_CLM_NAME_IMPORTANCE,
         cm::CONST_COMMON_CLM_NAME_ORDER,
+        cm::CONST_COMMON_CLM_NAME_USER_ID,
+        cm::CONST_COMMON_CLM_NAME_TITLE,
     ];
 
-    public function language(){
-        return $this -> belongsTo('App\Models\Language');
+    public function category(){
+        return $this -> belongsTo('App\Models\Category');
     }
 
     public function getLanguageName(){
-        return $this->language -> language;
+        return $this-> category -> category;
     }
 }
