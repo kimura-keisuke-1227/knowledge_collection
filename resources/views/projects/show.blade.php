@@ -98,6 +98,8 @@
             <th>id</th>
             <th>タスク名</th>
             <th>概要</th>
+            <th>重要度</th>
+            <th>緊急度</th>
             <th>ステータス</th>
         </tr>
         @foreach ($tasks as $task)
@@ -109,6 +111,8 @@
                     ])}}">{{$task->title}}</a>
             </td>
             <td>{{$task->summary}}</td>
+            <td>{{$divisions->get($task->importance)}}</td>
+            <td>{{$divisions->get($task->urgency)}}</td>
             <td>{{$divisions->get($task->status)}}</td>
         </tr>
         @endforeach
