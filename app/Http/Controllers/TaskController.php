@@ -63,7 +63,7 @@ class TaskController extends Controller
         $project = session('project');
         $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
         $validated[pr::CONST_FOREIGN_ID_KEY_OF_PROJECT_ID] = $project->id;
-        $validated[cm::CONST_COMMON_CLM_NAME_STATUS] = 0;
+        $validated[cm::CONST_COMMON_CLM_NAME_STATUS] = dv::CONST_VALUE_OF_TASK_STATUS_NOT_STARTED;
         Log::debug( $validated);
         
         try{
