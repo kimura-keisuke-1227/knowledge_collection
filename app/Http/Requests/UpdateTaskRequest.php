@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
 use App\Classes\Const\DatabaseConst\TaskTableConst as ts;
 use App\Classes\Const\ValidationConst as vl;
 
@@ -35,6 +36,8 @@ class UpdateTaskRequest extends FormRequest
             cm::CONST_COMMON_CLM_NAME_SUMMARY => [vl::CONST_VALIDATION_REQUIRED],
             cm::CONST_COMMON_CLM_NAME_DETAIL => [vl::CONST_VALIDATION_REQUIRED],
             cm::CONST_COMMON_CLM_NAME_STATUS => [],
+            dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE => [],
+            dv::CONST_VALUE_DIVISION_MASTER_URGENCY => [],
             ts::CONST_CLM_NAME_OF_TASK_TABLE_START_DATE => [],
             ts::CONST_CLM_NAME_OF_TASK_TABLE_END_DATE => [],
             ts::CONST_CLM_NAME_OF_TASK_TABLE_DEADLINE => [],

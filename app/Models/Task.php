@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
 use App\Classes\Const\DatabaseConst\TaskTableConst as ts;
 
 class Task extends Model
@@ -20,6 +21,8 @@ class Task extends Model
         cm::CONST_COMMON_CLM_NAME_SUMMARY,
         cm::CONST_COMMON_CLM_NAME_DETAIL,
         cm::CONST_COMMON_CLM_NAME_STATUS,
+        dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE,
+        dv::CONST_VALUE_DIVISION_MASTER_URGENCY,
         ts::CONST_CLM_NAME_OF_TASK_TABLE_START_DATE,
         ts::CONST_CLM_NAME_OF_TASK_TABLE_END_DATE,
         ts::CONST_CLM_NAME_OF_TASK_TABLE_DEADLINE,
