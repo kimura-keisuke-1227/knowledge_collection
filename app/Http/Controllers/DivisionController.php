@@ -108,4 +108,23 @@ class DivisionController extends Controller
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         return $divisions;
     }
+
+    // システムが設定した区分データを一括取得。
+     public function getCommonDivisionList(){
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+
+        $divisions = Division::where(
+            cm::CONST_COMMON_CLM_NAME_USER_ID ,
+             cm::CONST_INT_NO_USER_ID
+            );
+
+        try{
+            $divisions = $divisions->get();
+            Log::notice(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') got divisions');
+        } catch(Exception $e){
+            return 'エラーが発生しました。';
+        }
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return $divisions;
+     }
 }
