@@ -93,14 +93,11 @@ class DivisionController extends Controller
 
     public static function getMyDivisionList($user_id,$division_code){
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .') $division_code:' . $division_code);
-        $divisions = Division::orderBy(cm::CONST_COMMON_CLM_NAME_ORDER);
         if(true){
-            $divisions = $divisions->where(cm::CONST_COMMON_CLM_NAME_USER_ID , $user_id);
+            $divisions = Division::where(cm::CONST_COMMON_CLM_NAME_USER_ID , $user_id);
         }
 
-        if($division_code !== 0){
-            $divisions = $divisions->where(dv::CONST_CLM_NAME_OF_DIVISION_MASTERS_TABLE_DIVISION_MASTER_CODE);
-        }
+        $divisions =  $divisions->where(dv::CONST_CLM_NAME_OF_DIVISION_MASTERS_TABLE_DIVISION_MASTER_CODE,$division_code);
 
         try{
             $divisions = $divisions->get();
