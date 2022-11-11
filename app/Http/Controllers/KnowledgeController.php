@@ -11,6 +11,8 @@ use App\Http\Controllers\CategoryController as cat;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\KnowledgeTableCommon as kn;
 use App\Classes\Const\DatabaseConst\CategoryTableConst as csct;
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
+
 
 use Illuminate\Support\Facades\Log;
 use App\Classes\Util\Util;
@@ -45,6 +47,9 @@ class KnowledgeController extends Controller
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
         $cat = new cat();
 
+        $list_importance 
+        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+
         $categories = $cat::getMyCategoryList();
         $route=Util::getRoute(
             kn::CONST_TABLE_NAME_OF_KNOWLEDGE,
@@ -55,6 +60,8 @@ class KnowledgeController extends Controller
         return view('knowledge.create',[
              csct::CONST_TABLE_NAME_OF_CATEGORY=> $categories,
              cm::CONST_STRING_ROUTE => $route,
+             'list_importance' =>$list_importance,
+             'importance_normal' => dv::CONST_TEXT_OF_IMPORTANCE_NORMAL,
         ]);
     }
 
@@ -106,13 +113,16 @@ class KnowledgeController extends Controller
             cm::CONST_STRING_ACTION_STORE,
             
         );
-        
+
+        $list_importance 
+        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         return view('knowledge.show',[
             'knowledge' => $knowledge,
             csct::CONST_TABLE_NAME_OF_CATEGORY=> $categories,
             cm::CONST_STRING_ROUTE => $route,
-
+            'list_importance' => $list_importance,
         ]);
     }
 
@@ -139,7 +149,9 @@ class KnowledgeController extends Controller
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
         
         $validated = $request->validated();
-
+        Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') $validated:');
+        Log::debug($validated);
+        
         try{
             $knowledge->update($validated);
             Log::notice(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') update knowledge(' . $knowledge->id .') !!');
