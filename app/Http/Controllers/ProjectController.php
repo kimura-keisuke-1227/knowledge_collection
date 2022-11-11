@@ -169,6 +169,7 @@ class ProjectController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
         $taskController = new TaskController();
         try{
+            Log::info(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') call TaskController::getTasksFromProject !!');
             $tasks = $taskController->getTasksFromProject($project->id);
         } catch(Exception $e){
             return 'エラーが発生しました。';
@@ -177,10 +178,8 @@ class ProjectController extends Controller
         $divisionController = new DivisionController();
 
         try{
-            $divisions = $divisionController->getMyDivisionList(
-                cm::CONST_INT_NO_USER_ID,
-                dv::CONST_VALUE_DIVISION_MASTER_TASK_STATUS
-            );
+            Log::info(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') call DivisionController::getCommonDivisionList !!');
+            $divisions = $divisionController->getCommonDivisionList();
             Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') $divisions:');
             Log::debug($divisions);
         }catch(Exception $e){
