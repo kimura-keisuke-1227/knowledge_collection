@@ -109,7 +109,7 @@
                     ])}}">{{$task->title}}</a>
             </td>
             <td>{{$task->summary}}</td>
-            <td>{{$task->status}}</td>
+            <td>{{$divisions->get($task->status)}}</td>
         </tr>
         @endforeach
     </table>
