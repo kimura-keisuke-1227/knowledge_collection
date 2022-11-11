@@ -36,8 +36,15 @@ class TaskController extends Controller
      */
     public function create()
     {
+        $list_importance 
+        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+        $urgencies 
+        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_URGENCY);
+
         return view('task.create',[
-            
+            'list_importance' => $list_importance,
+            'urgencies' => $urgencies,
+
         ]);
     }
 
