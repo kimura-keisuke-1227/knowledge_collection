@@ -43,8 +43,9 @@ class TaskController extends Controller
 
         return view('task.create',[
             'list_importance' => $list_importance,
+            'importance_normal' => dv::CONST_TEXT_OF_IMPORTANCE_NORMAL,
             'urgencies' => $urgencies,
-
+            'urgency_normal'=> dv::CONST_TEXT_OF_URGENCY_NORMAL
         ]);
     }
 

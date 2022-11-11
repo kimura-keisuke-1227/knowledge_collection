@@ -40,7 +40,11 @@
                         <div class="flex">
                             <select id="importance" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="importance">
                                 @foreach($list_importance as $importance)
-                                <option value="{{$importance -> id}}" >
+                                <option value="{{$importance -> id}}" 
+                                @if ($importance -> division ==$importance_normal)
+                                    selected
+                                @endif
+                                >
                                     {{$importance -> division}}
                                 </option>
                                 @endforeach
@@ -61,7 +65,11 @@
                         <div class="flex">
                             <select id="urgency" class="appearance-none block pl-4 pr-8 py-3 mb-2 text-sm bg-white border rounded" name="urgency">
                                 @foreach($urgencies as $urgency)
-                                <option value="{{$urgency -> id}}">
+                                <option value="{{$urgency -> id}}"
+                                @if ($urgency -> division ==$urgency_normal)
+                                    selected
+                                @endif
+                                >
                                     {{$urgency -> division}}</option>
                                 @endforeach
                             </select>
