@@ -8,6 +8,7 @@ use App\Models\Project;
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\DivisionController;
 
 use Illuminate\Support\Facades\Log;
 use App\Classes\Util\Util;
@@ -173,11 +174,25 @@ class ProjectController extends Controller
             return 'エラーが発生しました。';
         }
 
+        $divisionController = new DivisionController();
+
+        try{
+            $divisions = $divisionController->getMyDivisionList(
+                cm::CONST_INT_NO_USER_ID,
+                dv::CONST_VALUE_DIVISION_MASTER_TASK_STATUS
+            );
+            Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') $divisions:');
+            Log::debug($divisions);
+        }catch(Exception $e){
+            return 'エラーが発生しました。';
+        }
+
         Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
         return view('projects.show', [
             'project' => $project,
             'tasks' => $tasks,
             'categories' => $this->getMyCategoryListFromCategoryController(),
+            'divisions' => $divisions->pluck('division','id'),
             'project_statuses' => $this->getListProjectStatuses(),
         ]);
     }
