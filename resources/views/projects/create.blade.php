@@ -1,6 +1,6 @@
 @extends('layouts.user')
 
-@section('title', 'タスク')
+@section('title', 'プロジェクト登録')
 
 @section('content')
 <div class="container">
