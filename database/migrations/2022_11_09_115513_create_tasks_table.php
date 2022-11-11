@@ -25,7 +25,7 @@ return new class extends Migration
             $table->foreignId(cm::CONST_COMMON_CLM_NAME_USER_ID);
             $table->string(cm::CONST_COMMON_CLM_NAME_TITLE);
             $table->string(cm::CONST_COMMON_CLM_NAME_SUMMARY);
-            $table->string(cm::CONST_COMMON_CLM_NAME_DETAIL);
+            $table->text(cm::CONST_COMMON_CLM_NAME_DETAIL);
             $table->foreignId(cm::CONST_COMMON_CLM_NAME_STATUS);
             $table->foreignId(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
             $table->foreignId(dv::CONST_VALUE_DIVISION_MASTER_URGENCY);
