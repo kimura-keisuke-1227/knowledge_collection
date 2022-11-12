@@ -51,7 +51,7 @@ class StoreBookmarkRequest extends FormRequest
             ],
             cm::CONST_COMMON_CLM_NAME_IMPORTANCE => [
                 vl::CONST_VALIDATION_NUMERIC
-        ],
+            ],
         ];
     }
 }
