@@ -24,12 +24,12 @@ class BookmarkController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
-        
-        
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
 
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
         return $this->showBookmarksIndex(
             $this->getMyBookmarks()
         );
@@ -42,23 +42,23 @@ class BookmarkController extends Controller
      */
     public function create()
     {
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
         $cat = new cat();
 
-        $list_importance 
-        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+        $list_importance
+            = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
 
         $categories = $cat::getMyCategoryList();
 
-        $list_is_url 
-        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_IS_URL);
-        
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
-        return view('bookmark.create',[
-             csct::CONST_TABLE_NAME_OF_CATEGORY=> $categories,
-             'list_importance' =>$list_importance,
-             'importance_normal' => dv::CONST_TEXT_OF_IMPORTANCE_NORMAL,
-             'list_is_url' => $list_is_url,
+        $list_is_url
+            = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_IS_URL);
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return view('bookmark.create', [
+            csct::CONST_TABLE_NAME_OF_CATEGORY => $categories,
+            'list_importance' => $list_importance,
+            'importance_normal' => dv::CONST_TEXT_OF_IMPORTANCE_NORMAL,
+            'list_is_url' => $list_is_url,
         ]);
     }
 
@@ -70,7 +70,7 @@ class BookmarkController extends Controller
      */
     public function store(StoreBookmarkRequest $request)
     {
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
 
         $validated = $request->validated();
         #$validated[ConstList::CONST_ORDERS_TABLE_CLM_NAME_ORDER_AT] = date("Y/m/d H:i:s");
@@ -79,16 +79,15 @@ class BookmarkController extends Controller
         $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
 
         $bookmark = Bookmark::create($validated);
-        Log::notice(__METHOD__.'('.__LINE__.') user(' .Util::getUserId() .') created knowledge date id(' . $bookmark->id .')');
-        try{
-        }
-        catch(Exception $e){
-            return('エラーが発生しました。');
+        Log::notice(__METHOD__ . '(' . __LINE__ . ') user(' . Util::getUserId() . ') created knowledge date id(' . $bookmark->id . ')');
+        try {
+        } catch (Exception $e) {
+            return ('エラーが発生しました。');
         }
 
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
 
-        return redirect() -> Route('bookmarks.index');
+        return redirect()->Route('bookmarks.index');
     }
 
     /**
@@ -99,29 +98,29 @@ class BookmarkController extends Controller
      */
     public function show(Bookmark $bookmark)
     {
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
-        
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+
         $cat = new cat();
 
 
-        $list_importance 
-        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+        $list_importance
+            = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
 
         $categories = $cat::getMyCategoryList();
 
-        $list_is_url 
-        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_IS_URL);
+        $list_is_url
+            = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_IS_URL);
 
-        
-        return view('bookmark.show',[
+
+        return view('bookmark.show', [
             'bookmark' => $bookmark,
-            csct::CONST_TABLE_NAME_OF_CATEGORY=> $categories,
-            'list_importance' =>$list_importance,
+            csct::CONST_TABLE_NAME_OF_CATEGORY => $categories,
+            'list_importance' => $list_importance,
             'importance_normal' => dv::CONST_TEXT_OF_IMPORTANCE_NORMAL,
             'list_is_url' => $list_is_url,
 
         ]);
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
     }
 
     /**
@@ -144,7 +143,22 @@ class BookmarkController extends Controller
      */
     public function update(UpdateBookmarkRequest $request, Bookmark $bookmark)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+        $validated = $request->validated();
+        try {
+            $bookmark->update($validated);
+            Log::notice(__METHOD__ . '(' . __LINE__ . ') user(' . util::getUserId() . ' update the project(' . $bookmark->id . ') !!');
+        } catch (Exception $e) {
+            return 'エラーが発生しました。';
+        }
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return redirect()->Route('bookmarks.index');
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return __METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')';
     }
 
     /**
@@ -158,20 +172,22 @@ class BookmarkController extends Controller
         //
     }
 
-    private function showBookmarksIndex($bookmarks){
-        return view('bookmark.index',[
+    private function showBookmarksIndex($bookmarks)
+    {
+        return view('bookmark.index', [
             'bookmarks' => $bookmarks
         ]);
     }
 
-    private function getMyBookmarks(){
-        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
-        $bookmarks = Bookmark::where(cm::CONST_COMMON_CLM_NAME_USER_ID,Util::getUserId())
-        ->orderBy(cm::CONST_COMMON_CLM_NAME_ORDER)
-        ->get();
-        Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') bookmarks:');
+    private function getMyBookmarks()
+    {
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+        $bookmarks = Bookmark::where(cm::CONST_COMMON_CLM_NAME_USER_ID, Util::getUserId())
+            ->orderBy(cm::CONST_COMMON_CLM_NAME_ORDER)
+            ->get();
+        Log::debug(__METHOD__ . '(' . __LINE__ . ') user(' . Util::getUserId() . ') bookmarks:');
         Log::debug($bookmarks);
-        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
         return $bookmarks;
     }
 }
