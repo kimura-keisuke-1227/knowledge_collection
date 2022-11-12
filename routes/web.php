@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
+use App\Http\Controllers\BookmarkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ Route::resource('/projects',ProjectController::class)
 ->middleware('auth');
 
 Route::resource('/tasks',TaskController::class)
+->middleware('auth');
+
+Route::resource('/bookmarks',BookmarkController::class)
 ->middleware('auth');
 
 //ログイン画面

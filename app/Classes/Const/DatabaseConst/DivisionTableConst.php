@@ -78,4 +78,10 @@ class DivisionTableConst
         const CONST_TEXT_OF_URGENCY_LOW = '低';
         const CONST_VALUE_OF_URGENCY_LOWEST = 5;
         const CONST_TEXT_OF_URGENCY_LOWEST = '最低';
+
+    const CONST_VALUE_DIVISION_MASTER_IS_URL = 'is_ulr';
+        const CONST_VALUE_OF_IS_URL_YES = 1;
+        const CONST_TEXT_OF_IS_URL_YES = 'はい';
+        const CONST_VALUE_OF_IS_URL_NO = 2;
+        const CONST_TEXT_OF_IS_URL_NO = 'いいえ';
     }
