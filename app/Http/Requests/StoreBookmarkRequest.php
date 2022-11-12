@@ -32,13 +32,26 @@ class StoreBookmarkRequest extends FormRequest
         return [
             cm::CONST_COMMON_CLM_NAME_USER_ID => [],
             bm::CONST_BOOKMARK_TABLE_CLM_NAME_OF_IS_URL => [],
-            bm::CONST_BOOKMARK_TABLE_CLM_NAME_OF_BOOKMARK_URL => [],
-            cm::CONST_COMMON_CLM_NAME_TITLE => [],
-            cm::CONST_COMMON_CLM_NAME_SUMMARY => [],
-            bm::CONST_BOOKMARK_TABLE_CLM_NAME_OF_MEMO => [],
+            bm::CONST_BOOKMARK_TABLE_CLM_NAME_OF_BOOKMARK_URL => [
+                vl::CONST_VALIDATION_REQUIRED
+            ],
+            cm::CONST_COMMON_CLM_NAME_TITLE => [
+                vl::CONST_VALIDATION_REQUIRED,
+                vl::CONST_VALIDATION_STRING_LENGTH_MAX_255
+            ],
+            cm::CONST_COMMON_CLM_NAME_SUMMARY => [
+                vl::CONST_VALIDATION_STRING_LENGTH_MAX_255
+            ],
+            bm::CONST_BOOKMARK_TABLE_CLM_NAME_OF_MEMO => [
+                vl::CONST_VALIDATION_TEXT_LENGTH_MAX_30000
+            ],
             ct::CONST_FOREIGN_ID_KEY_OF_CATEGORY_ID => [],
-            cm::CONST_COMMON_CLM_NAME_ORDER => [],
-            cm::CONST_COMMON_CLM_NAME_IMPORTANCE => [],
+            cm::CONST_COMMON_CLM_NAME_ORDER => [
+                vl::CONST_VALIDATION_NUMERIC
+            ],
+            cm::CONST_COMMON_CLM_NAME_IMPORTANCE => [
+                vl::CONST_VALIDATION_NUMERIC
+        ],
         ];
     }
 }
