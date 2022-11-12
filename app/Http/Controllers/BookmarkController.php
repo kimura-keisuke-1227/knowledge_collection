@@ -99,7 +99,29 @@ class BookmarkController extends Controller
      */
     public function show(Bookmark $bookmark)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        
+        $cat = new cat();
+
+
+        $list_importance 
+        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+
+        $categories = $cat::getMyCategoryList();
+
+        $list_is_url 
+        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_IS_URL);
+
+        
+        return view('bookmark.show',[
+            'bookmark' => $bookmark,
+            csct::CONST_TABLE_NAME_OF_CATEGORY=> $categories,
+            'list_importance' =>$list_importance,
+            'importance_normal' => dv::CONST_TEXT_OF_IMPORTANCE_NORMAL,
+            'list_is_url' => $list_is_url,
+
+        ]);
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
     }
 
     /**
