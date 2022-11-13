@@ -79,6 +79,10 @@
         <div class="mb-4">
             <textarea id="code" name="code" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください"></textarea>
         </div>
+        <h4>説明</h4>
+        <div class="mb-4">
+            <textarea id="explain" name="explain" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください"></textarea>
+        </div>
         <br>
         <div class="ml-auto">
             <button type="submit" class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">登録</button>

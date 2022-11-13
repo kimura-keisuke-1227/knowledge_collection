@@ -21,6 +21,7 @@ class Code extends Model
         cm::CONST_COMMON_CLM_NAME_ORDER,
         cm::CONST_COMMON_CLM_NAME_USER_ID,
         cm::CONST_COMMON_CLM_NAME_TITLE,
+        cm::CONST_COMMON_CLM_NAME_EXPLAIN,
     ];
 
     public function category(){

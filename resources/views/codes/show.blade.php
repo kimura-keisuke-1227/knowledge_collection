@@ -17,7 +17,7 @@
                 <td>題名</td>
                 <td>
                     <div class="mb-6">
-                        <input name="title" value="{{ $code -> title }}"  id="title" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" value="{{ old('') }}">
+                        <input name="title" value="{{ $code -> title }}" id="title" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" value="{{ old('') }}">
                     </div>
                 </td>
             </tr>
@@ -26,7 +26,7 @@
                 <td>
                     <div class="mb-6">
                         <input name="summary" value="{{ $code -> summary }}" id="summary" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" value="{{ old('') }}">
-                    </div>           
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -56,11 +56,13 @@
                 <td><input type="number" name="count" value="1"></td>
             </tr>
         </table>
+        <div class="mb-4">
+            <label for="code" class="block text-left p-1 my-1 font-medium">コード<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
+            <textarea name="code" id="code" class="w-full h-24 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->code}}</textarea>
+        </div>
         <h4>コード</h4>
-        <textarea name="code" id="" cols="100" rows="10">{{$code -> code}}</textarea>
-        <p>
-            {!! nl2br(e($code -> code)) !!}
-        </p>
+        <textarea name="explain" id="explain" cols="100" rows="10">{{$code -> explain}}</textarea>
+
         <br>
         <button type="submit">登録</button>
     </form>
