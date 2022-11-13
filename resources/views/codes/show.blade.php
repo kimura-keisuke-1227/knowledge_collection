@@ -60,8 +60,10 @@
             <label for="code" class="block text-left p-1 my-1 font-medium">コード<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
             <textarea name="code" id="code" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->code}}</textarea>
         </div>
-        <h4>コード</h4>
-        <textarea name="explain" id="explain" cols="100" rows="10">{{$code -> explain}}</textarea>
+        <div class="mb-4">
+            <label for="comment" class="block text-left p-1 my-1 font-medium">説明・コメント<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
+            <textarea name="comment" id="comment" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->comment}}</textarea>
+        </div>
 
         <br>
         <button type="submit">登録</button>
