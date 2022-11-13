@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Log;
 
 use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
 
+use Exception;
+
 class CodeController extends Controller
 {
     /**
@@ -38,7 +40,7 @@ class CodeController extends Controller
         Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
         $categories = Category::all();
         $list_importance
-        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+            = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
         return view('codes.create', [
@@ -76,11 +78,11 @@ class CodeController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
         $list_importance
-        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+            = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
 
         Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
-        return view('codes.show',[
-            'code' =>$code,
+        return view('codes.show', [
+            'code' => $code,
             'list_importance' => $list_importance
         ]);
     }
@@ -107,7 +109,19 @@ class CodeController extends Controller
      */
     public function update(UpdateCodeRequest $request, Code $code)
     {
-        //
+        Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+        $validated = $request->validated();
+        try {
+            $code->update($validated);
+            Log::notice(__METHOD__ . '(' . __LINE__ . ') user(' . util::getUserId() . ' update the project(' . $code->id . ') !!');
+        } catch (Exception $e) {
+            return 'エラーが発生しました。';
+        }
+
+        Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
+        return redirect()->Route('codes.show', [
+            'code' => $code,
+        ]);
     }
 
     /**

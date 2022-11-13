@@ -4,7 +4,10 @@
 
 @section('content')
 <div class="container">
-    <form action="{{Route('codes.store')}}" method="POST">
+    <form action="{{Route('codes.update',[
+            'code'=>$code
+        ])}}" method="POST">
+        @method('PUT')
         @csrf
         <table class='table table-striped'>
             <tr>
@@ -58,15 +61,17 @@
         </table>
         <div class="mb-4">
             <label for="code" class="block text-left p-1 my-1 font-medium">コード<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
-            <textarea name="code" id="code" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->code}}</textarea>
+            <textarea name="code" id="code" class="w-full h-96 p-4 text-xl leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->code}}</textarea>
         </div>
         <div class="mb-4">
-            <label for="comment" class="block text-left p-1 my-1 font-medium">説明・コメント<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
-            <textarea name="comment" id="comment" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->comment}}</textarea>
+            <label for="explain" class="block text-left p-1 my-1 font-medium">説明・コメント<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
+            <textarea name="explain" id="explain" class="w-full h-96 p-4 text-xl leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->explain}}</textarea>
         </div>
 
         <br>
-        <button type="submit">登録</button>
+        <div class="ml-auto">
+            <button type="submit" class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">更新</button>
+        </div>
     </form>
 </div>
 @endsection

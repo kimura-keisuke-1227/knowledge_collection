@@ -124,11 +124,11 @@
         </table>
         <div class="mb-4">
             <label for="memo" class="block text-left p-1 my-1 font-medium">メモ<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
-            <textarea id="memo" name="memo" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{ $bookmark->memo }}</textarea>
+            <textarea id="memo" name="memo" class="w-full h-96 p-4 text-xl leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{ $bookmark->memo }}</textarea>
         </div>
         <br>
         <div class="ml-auto">
-            <button type="submit" class="py-2 px-3 text-xs text-white font-semibold bg-indigo-500 rounded-md">登録</button>
+            <button type="submit" class="py-2 px-3 text-xl text-white font-semibold bg-indigo-500 rounded-md">登録</button>
         </div>
     </form>
 </div>
