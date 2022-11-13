@@ -17,7 +17,13 @@
         @foreach ($bookmarks as $bookmark)
         <tr>
             <td>{{ $bookmark -> order}}</td>
-            <td>{{ $bookmark -> title }}</td>
+            <td>
+                @if ($bookmark->isURL==$is_url)
+                <a href="{{$bookmark -> bookmark }}" target="_blank">{{$bookmark -> title}}</a>
+                @else
+                {{ $bookmark -> title }}
+                @endif
+            </td>
             <td>{{ $bookmark -> summary}}</td>
             <td><a href="{{$bookmark -> bookmark}}">リンク</a></td>
             <td><a href="{{Route('bookmarks.show', ['bookmark'=>$bookmark])}}">詳細・修正</a></td>

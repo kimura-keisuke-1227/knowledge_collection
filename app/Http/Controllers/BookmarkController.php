@@ -27,8 +27,6 @@ class BookmarkController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
 
-
-
         Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
         return $this->showBookmarksIndex(
             $this->getMyBookmarks()
@@ -174,8 +172,14 @@ class BookmarkController extends Controller
 
     private function showBookmarksIndex($bookmarks)
     {
+        $is_ulr = Util::getDivisionIdFromDivisionCodeAndDivisionValue(
+            dv::CONST_VALUE_DIVISION_MASTER_IS_URL,
+            dv::CONST_VALUE_OF_IS_URL_YES
+        );
+
         return view('bookmark.index', [
-            'bookmarks' => $bookmarks
+            'bookmarks' => $bookmarks,
+            'is_url' => $is_ulr,
         ]);
     }
 
