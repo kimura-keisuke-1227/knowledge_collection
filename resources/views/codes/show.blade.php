@@ -20,7 +20,7 @@
                 <td>題名</td>
                 <td>
                     <div class="mb-6">
-                        <input name="title" value="{{ $code -> title }}" id="title" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" value="{{ old('') }}">
+                        <input name="title" value="{{ $code -> title }}" id="title" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" value="{{ $code->title }}">
                     </div>
                 </td>
             </tr>
@@ -28,7 +28,7 @@
                 <td>概要</td>
                 <td>
                     <div class="mb-6">
-                        <input name="summary" value="{{ $code -> summary }}" id="summary" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" value="{{ old('') }}">
+                        <input name="summary" value="{{ $code -> summary }}" id="summary" class="block w-full px-4 py-3 mb-2 text-sm bg-white border rounded" type="text" value="{{ $code->title }}">
                     </div>
                 </td>
             </tr>
