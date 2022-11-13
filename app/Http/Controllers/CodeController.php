@@ -9,6 +9,8 @@ use App\Models\Category;
 use App\Classes\Util\Util;
 use Illuminate\Support\Facades\Log;
 
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
+
 class CodeController extends Controller
 {
     /**
@@ -35,9 +37,14 @@ class CodeController extends Controller
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
         $categories = Category::all();
+        $list_importance
+        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+
         Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
         return view('codes.create', [
             'categories' => $categories,
+            'importance_normal' => dv::CONST_TEXT_OF_IMPORTANCE_NORMAL,
+            'list_importance' => $list_importance,
         ]);
     }
 
@@ -68,8 +75,14 @@ class CodeController extends Controller
     public function show(Code $code)
     {
         Log::info(__METHOD__ . '(' . __LINE__ . ') start by user(' . Util::getUserId() . ')');
+        $list_importance
+        = Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_CODE_IMPORTANCE);
+
         Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
-        return view('codes.show',['code' =>$code]);
+        return view('codes.show',[
+            'code' =>$code,
+            'list_importance' => $list_importance
+        ]);
     }
 
     /**
