@@ -58,7 +58,7 @@
         </table>
         <div class="mb-4">
             <label for="code" class="block text-left p-1 my-1 font-medium">コード<span class="text-white text-xs bg-yellow-400 mx-2 py-1 px-2">必須</span></label>
-            <textarea name="code" id="code" class="w-full h-24 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->code}}</textarea>
+            <textarea name="code" id="code" class="w-full h-96 p-4 text-xs leading-none resize-none bg-blueGray-50 rounded outline-none border" type="text" placeholder="ご自由にご記入ください">{{$code->code}}</textarea>
         </div>
         <h4>コード</h4>
         <textarea name="explain" id="explain" cols="100" rows="10">{{$code -> explain}}</textarea>
