@@ -53,6 +53,9 @@ Route::resource('/templateMasterCategory',TemplateMasterCategoryController::clas
 Route::resource('/template',TemplateMasterHeaderController::class)
 ->middleware('auth');
 
+Route::resource('/templateItem',TemplateItemController::class)
+->middleware('auth');
+
 //ログイン画面
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']); 

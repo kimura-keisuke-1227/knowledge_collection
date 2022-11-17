@@ -84,4 +84,14 @@ class DivisionTableConst
         const CONST_TEXT_OF_IS_URL_YES = 'はい';
         const CONST_VALUE_OF_IS_URL_NO = 2;
         const CONST_TEXT_OF_IS_URL_NO = 'いいえ';
+    
+    const CONST_VALUE_DIVISION_MASTER_INPUT_TYPE = 'input_type';
+        const CONST_VALUE_OF_INPUT_TYPE_STRING = 1;
+        const CONST_TEXT_OF_INPUT_TYPE_STRING = '文字列';
+        const CONST_VALUE_OF_INPUT_TYPE_INTEGER = 2;
+        const CONST_TEXT_OF_INPUT_TYPE_INTEGER = '整数';
+        const CONST_VALUE_OF_INPUT_TYPE_FLOAT = 3;
+        const CONST_TEXT_OF_INPUT_TYPE_FLOAT = '数(小数あり)';
+        const CONST_VALUE_OF_INPUT_TYPE_SELECT = 4;
+        const CONST_TEXT_OF_INPUT_TYPE_SELECT = '選択';
     }
