@@ -6,6 +6,12 @@ use App\Http\Requests\StoreTemplateMasterCategoryRequest;
 use App\Http\Requests\UpdateTemplateMasterCategoryRequest;
 use App\Models\TemplateMasterCategory;
 
+use Illuminate\Support\Facades\Log;
+use App\Classes\Util\Util;
+use Exception;
+
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+
 class TemplateMasterCategoryController extends Controller
 {
     /**
@@ -15,7 +21,13 @@ class TemplateMasterCategoryController extends Controller
      */
     public function index()
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        $templateMasterCategories = TemplateMasterCategory::all();
+
+        return view('templateMasterCategory.index',[
+            'templateMasterCategories' => $templateMasterCategories
+        ]);
     }
 
     /**
@@ -25,7 +37,9 @@ class TemplateMasterCategoryController extends Controller
      */
     public function create()
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return view('templateMasterCategory.create');
     }
 
     /**
@@ -36,7 +50,27 @@ class TemplateMasterCategoryController extends Controller
      */
     public function store(StoreTemplateMasterCategoryRequest $request)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+
+        $validated = $request->validated();
+        #$validated[ConstList::CONST_ORDERS_TABLE_CLM_NAME_ORDER_AT] = date("Y/m/d H:i:s");
+        Log::debug($validated);
+
+        $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
+
+        try{
+            $knowledge = TemplateMasterCategory::create($validated);
+            Log::notice(__METHOD__.'('.__LINE__.') user(' .Util::getUserId() .') created knowledge date id(' .$knowledge->id .')');
+        }
+        catch(Exception $e){
+            return('エラーが発生しました。');
+        }
+
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+
+        return redirect() -> Route('templateMasterCategory.index');
+        return (__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+
     }
 
     /**

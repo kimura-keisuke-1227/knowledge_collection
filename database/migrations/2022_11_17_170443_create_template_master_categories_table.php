@@ -4,6 +4,9 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\TemplateMasterCategoryTableConst as tmc;
+
 return new class extends Migration
 {
     /**
@@ -13,8 +16,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('template_master_categories', function (Blueprint $table) {
+        Schema::create(tmc::CONST_TABLE_NAME_OF_TEMPLATE_MASTER_CATEGORY, function (Blueprint $table) {
             $table->id();
+            $table->foreignId(cm::CONST_COMMON_CLM_NAME_USER_ID);
+            $table->string(tmc::CONST_CLM_NAME_OF_CATEGORY_TABLE_TEMPLATE_MASTER_CATEGORY);
+            $table->integer(cm::CONST_COMMON_CLM_NAME_ORDER);
             $table->timestamps();
         });
     }
@@ -26,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('template_master_categories');
+        Schema::dropIfExists(tmc::CONST_TABLE_NAME_OF_TEMPLATE_MASTER_CATEGORY);
     }
 };

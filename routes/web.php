@@ -46,7 +46,7 @@ Route::resource('/tasks',TaskController::class)
 Route::resource('/bookmarks',BookmarkController::class)
 ->middleware('auth');
 
-Route::resource('/template/category',TemplateMasterCategoryController::class)
+Route::resource('/templateMasterCategory',TemplateMasterCategoryController::class)
 ->middleware('auth');
 
 //ログイン画面
