@@ -11,6 +11,7 @@ use App\Classes\Util\Util;
 use Exception;
 
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use Termwind\Components\Ul;
 
 class TemplateMasterCategoryController extends Controller
 {
@@ -116,5 +117,13 @@ class TemplateMasterCategoryController extends Controller
     public function destroy(TemplateMasterCategory $templateMasterCategory)
     {
         //
+    }
+
+    public function getMyTemplateMasterCategories(){
+        $myTemplateMasterCategories = TemplateMasterCategory::where(cm::CONST_COMMON_CLM_NAME_USER_ID,Util::getUserId())
+        ->orderBy(cm::CONST_COMMON_CLM_NAME_ORDER)
+        ->get();
+
+        return $myTemplateMasterCategories;
     }
 }

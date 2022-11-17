@@ -6,6 +6,14 @@ use App\Http\Requests\StoreTemplateMasterHeaderRequest;
 use App\Http\Requests\UpdateTemplateMasterHeaderRequest;
 use App\Models\TemplateMasterHeader;
 
+use App\Http\Controllers\TemplateMasterCategoryController;
+
+use Illuminate\Support\Facades\Log;
+use App\Classes\Util\Util;
+use Exception;
+
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+
 class TemplateMasterHeaderController extends Controller
 {
     /**
@@ -15,7 +23,12 @@ class TemplateMasterHeaderController extends Controller
      */
     public function index()
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        $templateMasterHeaders = TemplateMasterHeader::all(); 
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return view('templateMasterHeader.index',[
+            'templateMasterHeaders' => $templateMasterHeaders,
+        ]);
     }
 
     /**
@@ -25,7 +38,11 @@ class TemplateMasterHeaderController extends Controller
      */
     public function create()
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return view('templateMasterHeader.create',[
+            'myTemplateCategories' => $this->getMyTemplateCategories(),
+        ]);
     }
 
     /**
@@ -36,7 +53,27 @@ class TemplateMasterHeaderController extends Controller
      */
     public function store(StoreTemplateMasterHeaderRequest $request)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+
+        $validated = $request->validated();
+        #$validated[ConstList::CONST_ORDERS_TABLE_CLM_NAME_ORDER_AT] = date("Y/m/d H:i:s");
+        Log::debug($validated);
+
+        $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
+
+        try{
+            $knowledge = TemplateMasterHeader::create($validated);
+            Log::notice(__METHOD__.'('.__LINE__.') user(' .Util::getUserId() .') created knowledge date id(' .$knowledge->id .')');
+        }
+        catch(Exception $e){
+            return('エラーが発生しました。');
+        }
+
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+
+        return redirect() -> Route('template.index');
+        return (__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+
     }
 
     /**
@@ -82,5 +119,10 @@ class TemplateMasterHeaderController extends Controller
     public function destroy(TemplateMasterHeader $templateMasterHeader)
     {
         //
+    }
+
+    private function getMyTemplateCategories(){
+        $templateMasterCategoryController = new TemplateMasterCategoryController();
+        return $templateMasterCategoryController -> getMyTemplateMasterCategories();
     }
 }
