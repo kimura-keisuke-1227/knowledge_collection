@@ -9,6 +9,7 @@ use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\TemplateMasterCategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,6 +44,9 @@ Route::resource('/tasks',TaskController::class)
 ->middleware('auth');
 
 Route::resource('/bookmarks',BookmarkController::class)
+->middleware('auth');
+
+Route::resource('/template/category',TemplateMasterCategoryController::class)
 ->middleware('auth');
 
 //ログイン画面
