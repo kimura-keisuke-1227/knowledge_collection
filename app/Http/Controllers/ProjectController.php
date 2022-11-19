@@ -17,6 +17,7 @@ use Exception;
 use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
+use App\Classes\Const\SessionKeyConst as sk;
 
 use App\Models\Category;
 
@@ -93,7 +94,7 @@ class ProjectController extends Controller
 
 
         Log::info(__METHOD__ . '(' . __LINE__ . ') end by user(' . Util::getUserId() . ')');
-        session(['project' => $project]);
+        session([sk::CONST_SESSION_KEY_FOR_PROJECT => $project]);
         return $this->showProjectDetail($project);
     }
 

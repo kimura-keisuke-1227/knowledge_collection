@@ -12,6 +12,7 @@ use App\Classes\Const\DatabaseConst\ProjectTableConst as pr;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\TaskCommentTableConst as ts;
 use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
+use App\Classes\Const\SessionKeyConst as sk;
 
 use App\Models\Project;
 
@@ -60,7 +61,7 @@ class TaskController extends Controller
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
         $validated = $request->validated();
         Log::debug(__METHOD__.'('.__LINE__.') $validated:');
-        $project = session('project');
+        $project = session(sk::CONST_SESSION_KEY_FOR_PROJECT);
         $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
         $validated[pr::CONST_FOREIGN_ID_KEY_OF_PROJECT_ID] = $project->id;
         $validated[cm::CONST_COMMON_CLM_NAME_STATUS] 
@@ -133,7 +134,7 @@ class TaskController extends Controller
             return 'エラーが発生しました。';
         }
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
-        $project = session('project');
+        $project = session(sk::CONST_SESSION_KEY_FOR_PROJECT);
         return redirect() -> Route('projects.show',[
             'project' => $project,
         ]);
