@@ -14,5 +14,8 @@ class ProjectTableConst
     const CONST_CLM_NAME_OF_PROJECT_TABLE_PROJECT = 'project';
     const CONST_CLM_NAME_OF_PROJECT_TABLE_START_DATE = 'start_date';
     const CONST_CLM_NAME_OF_PROJECT_TABLE_END_DATE = 'end_date';
+    
+    //セッションキー
+    const CONST_SESSION_KEY_FOR_PROJECT = 'gk$_kge&45ke3ge';
 
 }
