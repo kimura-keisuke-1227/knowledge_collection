@@ -82,9 +82,16 @@ class TemplateMasterHeaderController extends Controller
      * @param  \App\Models\TemplateMasterHeader  $templateMasterHeader
      * @return \Illuminate\Http\Response
      */
-    public function show(TemplateMasterHeader $templateMasterHeader)
+    public function show(TemplateMasterHeader $template)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') $templateMasterHeader:');
+        Log::debug($template);
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return view('templateMasterHeader.show',[
+            'templateMasterHeader' => $template,
+            'myTemplateCategories' => $this->getMyTemplateCategories(),
+        ]);
     }
 
     /**
