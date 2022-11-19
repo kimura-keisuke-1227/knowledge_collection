@@ -6,6 +6,14 @@ use App\Http\Requests\StoreTemplateItemRequest;
 use App\Http\Requests\UpdateTemplateItemRequest;
 use App\Models\TemplateItem;
 
+use Illuminate\Support\Facades\Log;
+use App\Classes\Util\Util;
+use Exception;
+
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\TemplateMasterTableConst as tm;
+
 class TemplateItemController extends Controller
 {
     /**
@@ -15,7 +23,12 @@ class TemplateItemController extends Controller
      */
     public function index()
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return view('templateMasterHeader.create',[
+            'myTemplateCategories' => $this->getMyTemplateCategories(),
+        ]);
+
     }
 
     /**
@@ -25,7 +38,11 @@ class TemplateItemController extends Controller
      */
     public function create()
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+        return view('templateMasterItem.create',[
+            'inputTypes' => Util::getDivisionListFromDivisionMasterCode(dv::CONST_VALUE_DIVISION_MASTER_INPUT_TYPE),
+        ]);
     }
 
     /**
@@ -34,9 +51,32 @@ class TemplateItemController extends Controller
      * @param  \App\Http\Requests\StoreTemplateItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTemplateItemRequest $request)
+    public function store(StoreTemplateItemRequest $request, $templateMasterHeader)
     {
-        //
+        Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
+        $templateMasterHeader = $request->query('templateMasterHeader');
+        Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') $templateMasterHeader:' . $request->templateMasterHeader);
+        $validated = $request->validated();
+        #$validated[ConstList::CONST_ORDERS_TABLE_CLM_NAME_ORDER_AT] = date("Y/m/d H:i:s");
+        Log::debug($request);
+
+        $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
+        $validated[tm::CONST_FOREIGN_ID_KEY_OF_TEMPLATE_MASTER_HEADERS_ID] = 1;
+
+        try{
+            $knowledge = TemplateItem::create($validated);
+            Log::notice(__METHOD__.'('.__LINE__.') user(' .Util::getUserId() .') created knowledge date id(' .$knowledge->id .')');
+        }
+        catch(Exception $e){
+            Log::error($e);
+            return('エラーが発生しました。');
+        }
+
+        Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+
+        return redirect() -> Route('knowledge.index');
+        return (__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
+
     }
 
     /**
