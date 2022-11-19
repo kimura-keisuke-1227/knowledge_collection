@@ -14,4 +14,10 @@ class TemplateMasterTableConst
 
     const CONST_CLM_NAME_OF_CATEGORY_TABLE_TEMPLATE_MASTER_HEADER = 'template_master_header';
 
+    //template_master_itemsテーブル
+    const CONST_TABLE_NAME_OF_TEMPLATE_ITEMS = 'template_items';
+
+    const CONST_FOREIGN_ID_KEY_OF_TEMPLATE_ITEMS_ID = 'template_item_id';
+
+    const CONST_CLM_NAME_OF_CATEGORY_TABLE_TEMPLATE_ITEM = 'template_item';
 }
