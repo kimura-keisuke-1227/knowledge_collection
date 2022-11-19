@@ -4,6 +4,11 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\DatabaseConst\TemplateMasterTableConst as tm;
+use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
+use App\Classes\Const\ValidationConst as vl;
+
 class StoreTemplateItemRequest extends FormRequest
 {
     /**
@@ -13,7 +18,7 @@ class StoreTemplateItemRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +29,12 @@ class StoreTemplateItemRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            tm::CONST_FOREIGN_ID_KEY_OF_TEMPLATE_MASTER_HEADERS_ID =>[],
+            cm::CONST_COMMON_CLM_NAME_ORDER=>[],
+            tm::CONST_CLM_NAME_OF_CATEGORY_TABLE_TEMPLATE_ITEM=>[],
+            cm::CONST_COMMON_CLM_NAME_EXPLAIN=>[],
+            dv::CONST_VALUE_DIVISION_MASTER_INPUT_TYPE=>[],
+            cm::CONST_COMMON_CLM_NAME_DIGIT=>[],
         ];
     }
 }
