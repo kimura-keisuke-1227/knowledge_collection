@@ -5,6 +5,7 @@
 @section('content')
     <div class="container">
         <a href="{{ Route('template.create') }}">テンプレート登録へ</a>
+        <a href="{{ Route('templateMasterCategory.index') }}">テンプレートカテゴリー一覧</a>
         <table class='table table-striped'>
             <tr>
                 <th>ID</th>
@@ -15,6 +16,7 @@
             @foreach ($templateMasterHeaders as $templateMasterHeader)
                 <tr>
                     <td>{{ $templateMasterHeader -> id}}</td>
+                    <td>{{ $templateMasterHeader -> template_master_header }}</td>
                     <td>{{ $templateMasterHeader -> template_master_header }}</td>
                     <td><a href="{{Route('template.show', ['template'=>$templateMasterHeader])}}">詳細・修正</a></td>
                 </tr>
