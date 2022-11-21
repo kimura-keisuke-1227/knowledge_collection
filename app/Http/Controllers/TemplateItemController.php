@@ -13,6 +13,7 @@ use Exception;
 use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\TemplateMasterTableConst as tm;
+use App\Classes\Const\SessionKeyConst as sk;
 
 class TemplateItemController extends Controller
 {
@@ -51,7 +52,7 @@ class TemplateItemController extends Controller
      * @param  \App\Http\Requests\StoreTemplateItemRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreTemplateItemRequest $request, $templateMasterHeader)
+    public function store(StoreTemplateItemRequest $request)
     {
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
         $templateMasterHeader = $request->query('templateMasterHeader');
@@ -61,7 +62,8 @@ class TemplateItemController extends Controller
         Log::debug($request);
 
         $validated[cm::CONST_COMMON_CLM_NAME_USER_ID] = Util::getUserId();
-        $validated[tm::CONST_FOREIGN_ID_KEY_OF_TEMPLATE_MASTER_HEADERS_ID] = 1;
+        $validated[tm::CONST_FOREIGN_ID_KEY_OF_TEMPLATE_MASTER_HEADERS_ID] 
+            = session(sk::CONST_SESSION_KEY_FOR_TEMPLATE_MASTER_HEADER)->id;
 
         try{
             $knowledge = TemplateItem::create($validated);
@@ -122,5 +124,16 @@ class TemplateItemController extends Controller
     public function destroy(TemplateItem $templateItem)
     {
         //
+    }
+
+    public static function getTemplateItemList(int $template_id){
+        $templateItemList = TemplateItem::with('getRelationDivision')
+            ->where(tm::CONST_FOREIGN_ID_KEY_OF_TEMPLATE_MASTER_HEADERS_ID,$template_id)
+            -> orderBy(cm::CONST_COMMON_CLM_NAME_ORDER);
+        //dd($templateItemList->toSql());
+        Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') [SQL]'.$templateItemList->toSql());
+        Log::debug($templateItemList->getBindings());
+        $templateItemList-> get();
+        return $templateItemList;
     }
 }
