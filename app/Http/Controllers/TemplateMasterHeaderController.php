@@ -13,6 +13,9 @@ use App\Classes\Util\Util;
 use Exception;
 
 use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
+use App\Classes\Const\SessionKeyConst as sk;
+
+use App\Http\Controllers\TemplateItemController;
 
 class TemplateMasterHeaderController extends Controller
 {
@@ -87,10 +90,15 @@ class TemplateMasterHeaderController extends Controller
         Log::info(__METHOD__.'('.__LINE__.') start by user(' . Util::getUserId() .')');
         Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') $templateMasterHeader:');
         Log::debug($template);
+        session([
+            sk::CONST_SESSION_KEY_FOR_TEMPLATE_MASTER_HEADER=>$template
+        ]);
+        $templateItemList = TemplateItemController::getTemplateItemList($template->id);
         Log::info(__METHOD__.'('.__LINE__.') end by user(' . Util::getUserId() .')');
         return view('templateMasterHeader.show',[
             'templateMasterHeader' => $template,
             'myTemplateCategories' => $this->getMyTemplateCategories(),
+            'templateItemList' => $templateItemList
         ]);
     }
 
