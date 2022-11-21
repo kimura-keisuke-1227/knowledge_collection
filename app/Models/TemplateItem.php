@@ -9,6 +9,10 @@ use App\Classes\Const\DatabaseConst\CommonDatabaseConst as cm;
 use App\Classes\Const\DatabaseConst\TemplateMasterTableConst as tm;
 use App\Classes\Const\DatabaseConst\DivisionTableConst as dv;
 
+use Illuminate\Support\Facades\Log;
+use App\Classes\Util\Util;
+use Exception;
+
 class TemplateItem extends Model
 {
     use HasFactory;
@@ -20,4 +24,14 @@ class TemplateItem extends Model
         dv::CONST_VALUE_DIVISION_MASTER_INPUT_TYPE,
         cm::CONST_COMMON_CLM_NAME_DIGIT,
     ];
+
+    public function getRelationDivision(){
+        return $this->belongsTo('App\Models\Division','input_item','id');
+    }
+
+    public function getDivision(){
+        Log::debug(__METHOD__.'('.__LINE__.') user(' . Util::getUserId() .') $request:');
+        Log::debug($this->getRelationDivision);
+        return $this->getRelationDivision->division;
+    }
 }

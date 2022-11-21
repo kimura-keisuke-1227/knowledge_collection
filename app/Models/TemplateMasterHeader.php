@@ -21,4 +21,12 @@ class TemplateMasterHeader extends Model
         cm::CONST_COMMON_CLM_NAME_IMPORTANCE,
         tmc::CONST_FOREIGN_ID_KEY_OF_TEMPLATE_MASTER_CATEGORY_ID,
     ];
+
+    public function getRelationDivision(){
+        return $this->hasMany('App\Models\Division');
+    }
+
+    public function getDivision(){
+        return $this->getRelationDivision()->division;
+    }
 }
