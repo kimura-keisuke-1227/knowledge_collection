@@ -65,5 +65,19 @@
 
     <h3>テンプレートアイテム一覧</h3>
     <a href="{{Route('templateItem.create')}}">テンプレートアイテム登録</a>
+    <table class="table table-striped">
+        <tr>
+            <th>項目</th>
+            <th>説明</th>
+            <th>説明</th>
+        </tr>
+        @foreach ($templateItemList as $templateItem)
+            <tr>
+                <td>{{$templateItem->template_item}}</td>
+                <td>{{ $templateItem->explain }}</td>
+                <td>{{ $templateItem->getDivision() }}</td>
+            </tr>
+        @endforeach
+    </table>
 </div>
 @endsection
