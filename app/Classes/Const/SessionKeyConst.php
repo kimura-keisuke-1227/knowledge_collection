@@ -9,6 +9,8 @@ class SessionKeyConst
 {
     //タスク登録時に使うセッションキー
     const CONST_SESSION_KEY_FOR_PROJECT = 'gk$_kge&45ke3ge';
+
+    const CONST_SESSION_KEY_FOR_TEMPLATE_MASTER_HEADER = 'gejY{51+eegWF#&4';
 }
 
 
